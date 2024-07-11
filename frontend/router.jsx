@@ -1,44 +1,43 @@
 import {Navigate, createBrowserRouter} from  'react-router-dom';
-import GuestLayout from './src/Components/Guestlayout';
 import Product from './src/Components/Product';
 import Login from './src/Components/Login';
 import Register from './src/Components/Register';
-import Users from './src/Components/Users';
 import NotFound from './src/Components/NotFound';
 import Defaultlayout from './src/Components/Defaultlayout';
 import Dashboard from './src/views/Dashboard';
+import GuestLayout from './src/Components/GuestLayout';
 import Home from './src/views/Home';
 const router = createBrowserRouter([
 
     {
-          path:'/',
+          path:'/dashboard',
           element:<Defaultlayout/>,
           children:[
             {
-                  path:'/',
-                  element: <Navigate to="/users"/>
-            },
-
-            {
-                path:'/dashboard',
-                element:<Dashboard/>
-            },
-            {
-                path:'/users',
-                element:<Users/>
-            },
-            
+                  path:'/dashboard',
+                  element: <Dashboard/>
+            }, 
           ]
     },
+
+
     {
          path:'/',
          element:<GuestLayout/>,
          children:[
+
+            {
+                path:'/',
+                element: <Navigate to='/home'></Navigate>
+            },
+            {
+                path:'/home',
+                element:<Home></Home>
+            },
             {
                 path:'/register',
                 element:<Register/>
             },
-        
             {
                 path:'/login',
                 element:<Login/>

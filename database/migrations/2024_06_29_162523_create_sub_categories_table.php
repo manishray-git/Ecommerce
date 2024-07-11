@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id')->references('id')->on('categories')->onDelet('cascade')->onUpdate('cascade');
             $table->string('name');
+            $table->string('slug');
+            $table->string('status');
             $table->timestamps();
         });
     }

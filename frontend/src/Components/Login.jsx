@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import axiosClient from "../axios-client";
+import {useStateContext} from '../context/ContextProvider';
 
 export default function Login() {
+
     const [user, setUser] = useState({});
 
     const [errors, setErrors] = useState({});
+
+    const  {setToken} = useStateContext();
+
+
 
     const handleOnChange = (event) => {
 		setUser((prevuser)=>({
@@ -17,9 +23,10 @@ export default function Login() {
     const login = (event) => {
 		event.preventDefault();
 		axiosClient.post('/login',user).then((res)=>{
-          let {access_token} = res.data
-			
+          let {access_token} = res.data;
+          setToken(access_token);
 
+          setErrors({});
 		}).catch((error)=>{
 
 			let {validator_err} = error.response.data;
@@ -79,7 +86,7 @@ export default function Login() {
                             onChange={handleOnChange}
                         />
                     </div>
-					<span className="text-red-600 italic">{errors.email}</span>
+					<span className="text-red-600 italic">{errors.email || ''}</span>
 					</div>
 					<div>
                     <div className="flex items-center border-2 py-2 px-3 rounded-2xl">
@@ -104,7 +111,7 @@ export default function Login() {
                             onChange={handleOnChange}
                         />
                     </div>
-					<span className="text-red-600 italic">{errors.password}</span>
+					<span className="text-red-600 italic">{errors.password || ''}</span>
 					</div>
                     <button
                         type="submit"

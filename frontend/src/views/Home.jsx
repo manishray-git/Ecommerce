@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductList from  '../Components/ProductList'
 import Footer from '../Components/Footer';
+import SpecialOfferComponent from '../Components/website_component/SpecialOfferComponent';
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
 </div>
 
 <div>
+ <SpecialOfferComponent></SpecialOfferComponent>
 <Footer/>
 </div>
 </>
